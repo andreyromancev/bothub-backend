@@ -1,4 +1,4 @@
-from app.environment.base import *
+from environment.base import *
 
 
 DEBUG = True
