@@ -2,5 +2,5 @@ from app.environment.base import *
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['bothub-test-api.herokuapp.com']
+ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
 

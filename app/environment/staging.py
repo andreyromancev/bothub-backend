@@ -3,7 +3,7 @@ from app.environment.base import *
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['bothub-test-api.herokuapp.com']
+ALLOWED_HOSTS = ['stage-api-bothub.herokuapp.com']
 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL)
