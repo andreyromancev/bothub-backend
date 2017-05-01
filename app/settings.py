@@ -1,8 +1,19 @@
 import os
-from environment import *
+import dj_database_url
 
-
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SECRET_KEY = os.environ.get('SECRET_KEY', 'development_key')
+
+if ENVIRONMENT == 'production':
+    DEBUG = False
+    ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
+elif ENVIRONMENT == 'staging':
+    DEBUG = False
+    ALLOWED_HOSTS = ['stage-api-bothub.herokuapp.com']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
@@ -25,6 +36,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'urls'
+
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://bothub:123456@localhost/bothub_db')
+
+DATABASES = {
+    'default': dj_database_url.config(default=DATABASE_URL)
+}
 
 TEMPLATES = [
     {
@@ -63,13 +80,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
