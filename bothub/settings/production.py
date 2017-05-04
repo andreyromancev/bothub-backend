@@ -1,7 +1,7 @@
 import os
 import dj_database_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.join(os.path.abspath(__file__), '..')))
+BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'development_key')
 
 IS_PRODUCTION = True
