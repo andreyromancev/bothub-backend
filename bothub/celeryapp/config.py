@@ -1,16 +1,17 @@
 import os
+from django.conf import settings
 
-ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 
-if ENVIRONMENT == 'development':
+if settings.IS_DEVELOPMENT:
     result_backend = 'cache'
     cache_backend = 'memory'
     broker_url = 'memory://'
     task_always_eager = True
     task_eager_propagates = True
 else:
-    broker_url = os.environ['REDIS_URL']
-    result_backend = os.environ['REDIS_URL']
+    redis_url = os.environ.get('REDIS_URL')
+    broker_url = redis_url
+    result_backend = redis_url
 
 task_serializer = 'json'
 accept_content = ['json']

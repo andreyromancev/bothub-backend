@@ -1,19 +1,13 @@
 import os
 import dj_database_url
 
-ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', 'development_key')
 
-if ENVIRONMENT == 'production':
-    DEBUG = False
-    ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
-elif ENVIRONMENT == 'staging':
-    DEBUG = False
-    ALLOWED_HOSTS = ['stage-api-bothub.herokuapp.com']
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
+IS_PRODUCTION = True
+
+DEBUG = False
+ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
 
 
 INSTALLED_APPS = [
@@ -23,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bothub.utils.mailer',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +30,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'bothub.urls'
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://bothub:123456@localhost/bothub_db')
 
@@ -61,7 +56,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'bothub.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
