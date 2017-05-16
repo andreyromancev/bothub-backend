@@ -8,6 +8,7 @@ IS_PRODUCTION = True
 
 DEBUG = False
 ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
+SITE_WEB = 'https://web-bothub.herokuapp.com'
 
 
 INSTALLED_APPS = [
@@ -17,7 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bothub.utils.mailer',
+    'bothub.core'
 ]
 
 MIDDLEWARE = [
@@ -82,3 +85,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/static')
+
+
+MAILER_FROM_EMAIL = 'Bothub'
+MAILER_ADMIN_EMAIL = 'pixel33develop@gmail.com'
+MAILER_MANAGER_EMAIL = 'pixel33develop@gmail.com'

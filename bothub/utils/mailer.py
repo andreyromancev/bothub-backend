@@ -21,8 +21,8 @@ def mail_users(email_list, template_path, context=None):
     _send_mail.delay(email_list, template_path, context)
 
 
-@pass_for_development
 @shared_task(autoretry_for=(SMTPException,), retry_kwargs={'max_retries': 3})
+@pass_for_development
 def _send_mail(email_list, template_path, context=None):
     message = EmailMessage(
         subject=loader.get_template(os.path.join('mail', template_path, 'subject.html')).render(context),

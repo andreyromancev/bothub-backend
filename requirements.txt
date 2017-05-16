@@ -3,4 +3,6 @@ gunicorn==19.7.1
 psycopg2==2.7.1
 dj-database-url==0.4.2
 celery[redis]==4.0.2
-django-tastypie==0.13.3
+djangorestframework==3.6.3
+markdown==2.6.8
+django-filter==1.0.2
