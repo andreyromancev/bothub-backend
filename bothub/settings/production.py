@@ -10,7 +10,6 @@ DEBUG = False
 ALLOWED_HOSTS = ['api-bothub.herokuapp.com']
 SITE_WEB = 'https://web-bothub.herokuapp.com'
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
