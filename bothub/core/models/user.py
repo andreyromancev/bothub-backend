@@ -19,16 +19,23 @@ def _prepare_for_activation(self):
     self.password = activation_key
     self.save()
 
-    mail_users([self.email], 'email_confirm', context={
-        'activation_url': '{}/user_activate/?activation_key={}'.format(settings.SITE_WEB, activation_key)
-    })
-
 
 def _activate(self, password):
+    assert not self.is_active
+
     self.is_active = True
     self.password = make_password(password)
     self.save()
 
 
+def _send_confirmation_email(self):
+    assert not self.is_active
+
+    mail_users([self.email], 'email_confirm', context={
+        'activation_url': '{}/user_activate/?activation_key={}'.format(settings.SITE_WEB, self.password)
+    })
+
+
 User.add_to_class('prepare_for_activation', _prepare_for_activation)
+User.add_to_class('send_confirmation_email', _send_confirmation_email)
 User.add_to_class('activate', _activate)

@@ -86,6 +86,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/static')
 
 
-MAILER_FROM_EMAIL = 'Bothub'
-MAILER_ADMIN_EMAIL = 'pixel33develop@gmail.com'
-MAILER_MANAGER_EMAIL = 'pixel33develop@gmail.com'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'bot@amber.sh'
+EMAIL_HOST_PASSWORD = '-CS:2;`m8YcAd7Nq'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+MAILER_FROM_EMAIL = 'bot@amber.sh'
+MAILER_ADMIN_EMAIL = 'admins@amber.sh'
+MAILER_MANAGER_EMAIL = 'managers@amber.sh'

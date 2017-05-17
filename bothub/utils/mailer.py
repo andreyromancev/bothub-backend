@@ -32,4 +32,3 @@ def _send_mail(email_list, template_path, context=None):
     )
     message.content_subtype = 'html'
     message.send()
-
