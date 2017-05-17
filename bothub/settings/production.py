@@ -1,7 +1,7 @@
 import os
 import dj_database_url
 
-BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = os.environ.get('SECRET_KEY', 'development_key')
 
 IS_PRODUCTION = True
@@ -95,3 +95,19 @@ EMAIL_USE_SSL = True
 MAILER_FROM_EMAIL = 'bot@amber.sh'
 MAILER_ADMIN_EMAIL = 'admins@amber.sh'
 MAILER_MANAGER_EMAIL = 'managers@amber.sh'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+}

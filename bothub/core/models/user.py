@@ -14,7 +14,6 @@ def _prepare_for_activation(self):
     salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
     activation_key = hashlib.sha1((salt + self.username).encode('utf-8')).hexdigest()
 
-    self.email = self.username
     self.is_active = False
     self.password = activation_key
     self.save()

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from rest_framework import serializers, viewsets, status
+from rest_framework import serializers, viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.validators import UniqueValidator
 from rest_framework.decorators import list_route
@@ -37,6 +37,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     http_method_names = ('post', 'get', 'options')
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -48,7 +49,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    @list_route(methods=['post'], url_path='activate', serializer_class=ActivateSerializer)
+    def perform_create(self, serializer):
+        serializer.save(email=self.request.user.username)
+
+    @list_route(methods=['post'], serializer_class=ActivateSerializer)
     def activate(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
