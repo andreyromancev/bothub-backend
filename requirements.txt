@@ -1,10 +1,20 @@
+# core
 Django==1.11.0
 gunicorn==19.7.1
+
+# db
 psycopg2==2.7.1
 dj-database-url==0.4.2
+
+# threads, mq and events
+gevent==1.2.1
 celery[redis]==4.0.2
+
+# api
 djangorestframework==3.6.3
 djangorestframework-jwt==1.10.0
 markdown==2.6.8
 django-filter==1.0.2
+
+# utils
 ipython==6.0
