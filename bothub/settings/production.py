@@ -2,7 +2,7 @@ import os
 import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SECRET_KEY = os.environ.get('SECRET_KEY', 'development_key')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 IS_PRODUCTION = True
 
@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'bothub.utils.mailer',
     'bothub.core'
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,6 +98,10 @@ MAILER_FROM_EMAIL = 'bot@amber.sh'
 MAILER_ADMIN_EMAIL = 'admins@amber.sh'
 MAILER_MANAGER_EMAIL = 'managers@amber.sh'
 
+
+CORS_ORIGIN_WHITELIST = (
+    'web-bothub.herokuapp.com',
+)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
