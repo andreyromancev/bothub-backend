@@ -27,20 +27,21 @@ def refresh_jwt_decode_handler(token, key):
 
 def refresh_jwt_payload_handler(user):
     return {
-        'user_id': user.pk,
-        'username': get_username(user),
+        'uid': user.pk,
+        'una': get_username(user),
     }
 
 
 def access_jwt_payload_handler(user):
     payload = {
-        'user_id': user.pk,
-        'email': user.email,
-        'username': get_username(user),
-        'exp': datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
+        'uid': user.pk,
+        'ema': user.email,
+        'una': get_username(user),
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA,
     }
     if isinstance(user.pk, uuid.UUID):
-        payload['user_id'] = str(user.pk)
+        payload['uid'] = str(user.pk)
 
     if api_settings.JWT_AUDIENCE is not None:
         payload['aud'] = api_settings.JWT_AUDIENCE

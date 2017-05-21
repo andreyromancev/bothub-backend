@@ -11,6 +11,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         required=True, source='username', validators=[UniqueValidator(queryset=User.objects.all())]
     )
 
+    def validate(self, params):
+        data = super(UserSerializer, self).validate(params)
+        data['email'] = data.get('username')
+
+        return data
+
     class Meta:
         model = User
         fields = ('id', 'email', 'url')
@@ -48,9 +54,6 @@ class UserViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def perform_create(self, serializer):
-        serializer.save(email=self.request.user.username)
 
     @list_route(methods=['post'], serializer_class=ActivateSerializer)
     def activate(self, request):

@@ -20,10 +20,10 @@ class AccessTokenSerializer(serializers.Serializer):
         User = get_user_model()
         refresh_token = params.get('refresh_token')
         refresh_payload = jwt.decode(refresh_token, None, False)
-        user_id = refresh_payload.get('user_id')
+        user_id = refresh_payload.get('uid')
 
         try:
-            user = User.objects.get(id=user_id, refresh_tokens__key=refresh_token)
+            user = User.objects.get(pk=user_id, refresh_tokens__key=refresh_token)
         except User.DoesNotExist:
             raise serializers.ValidationError(_('Invalid refresh token.'))
 
