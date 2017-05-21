@@ -1,10 +1,10 @@
 import os
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bothub.settings.development')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webapp.settings.development')
 
 app = Celery('app')
-app.config_from_object('bothub.celeryapp.config')
+app.config_from_object('lib.framework.celeryapp.config')
 app.autodiscover_tasks()
 
 

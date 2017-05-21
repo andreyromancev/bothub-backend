@@ -19,8 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'bothub.utils.mailer',
-    'bothub.core'
+    'lib.utils.mailer',
+    'lib.framework.celeryapp',
+    'service.auth_bothub'
 ]
 
 MIDDLEWARE = [
@@ -34,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bothub.urls'
+ROOT_URLCONF = 'webapp.urls'
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://bothub:123456@localhost/bothub_db')
 
@@ -45,9 +46,6 @@ DATABASES = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'bothub/templates'),
-        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -60,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bothub.wsgi.application'
+WSGI_APPLICATION = 'webapp.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
