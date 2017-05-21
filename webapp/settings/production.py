@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -21,7 +22,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'lib.utils.mailer',
     'lib.framework.celeryapp',
-    'service.auth_bothub'
+    'lib.framework.rest_api.token_management',
+    'service.auth_bothub',
 ]
 
 MIDDLEWARE = [
@@ -102,16 +104,16 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'lib.framework.rest_api.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     )
 }
 
 JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=10),
+    'JWT_PAYLOAD_HANDLER': 'lib.framework.rest_api.token_management.utils.access_jwt_payload_handler',
 }
+
+TOKEN_DEFAULT_SERVICE = 'service'

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from rest_framework import serializers, viewsets, status, permissions
+from rest_framework import serializers, viewsets, status
 from rest_framework.response import Response
 from rest_framework.validators import UniqueValidator
 from rest_framework.decorators import list_route
@@ -37,8 +37,7 @@ class ActivateSerializer(serializers.Serializer):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    http_method_names = ('post', 'get', 'options')
-    permission_classes = (permissions.IsAuthenticated,)
+    http_method_names = ('post', 'options')
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -55,14 +54,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['post'], serializer_class=ActivateSerializer)
     def activate(self, request):
-        # serializer = self.get_serializer(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        #
-        # user = serializer.user
-        # if user.is_active:
-        #     raise serializers.ValidationError({'detail': 'User is already activated.'})
-        #
-        # user.activate(serializer.validated_data['password'])
-        #
-        # return Response(UserSerializer(user, context={'request': request}).data, status=status.HTTP_202_ACCEPTED)
-        return Response({}, status=status.HTTP_202_ACCEPTED)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.user
+        if user.is_active:
+            raise serializers.ValidationError({'detail': 'User is already activated.'})
+
+        user.activate(serializer.validated_data['password'])
+
+        return Response(UserSerializer(user, context={'request': request}).data, status=status.HTTP_202_ACCEPTED)
