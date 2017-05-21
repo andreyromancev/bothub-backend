@@ -6,6 +6,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 IS_PRODUCTION = True
+IS_STAGING = False
+IS_DEVELOPMENT = False
 
 DEBUG = False
 ALLOWED_HOSTS = ['api-bothub.herokuapp.com']

@@ -2,6 +2,7 @@ from .production import *
 
 IS_PRODUCTION = False
 IS_STAGING = True
+IS_DEVELOPMENT = False
 
 DEBUG = False
 ALLOWED_HOSTS = ['stage-api-bothub.herokuapp.com']

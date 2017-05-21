@@ -1,6 +1,7 @@
 from .production import *
 
 IS_PRODUCTION = False
+IS_STAGING = False
 IS_DEVELOPMENT = True
 
 DEBUG = True
