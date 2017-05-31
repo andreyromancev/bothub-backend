@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'lib.framework.celeryapp',
     'lib.framework.rest_api.token_management',
     'service.auth_bothub',
+    'service.market',
+    'service.interaction',
 ]
 
 MIDDLEWARE = [
