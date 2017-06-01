@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'lib.utils.mailer',
     'lib.framework.celeryapp',
     'lib.framework.rest_api.token_management',
-    'service.auth_bothub',
+    'service.authentication',
     'service.market',
     'service.interaction',
 ]
@@ -121,3 +121,6 @@ JWT_AUTH = {
 }
 
 TOKEN_DEFAULT_SERVICE = 'service'
+
+AUTH_USER_MODEL = 'authentication.User'
+

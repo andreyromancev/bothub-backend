@@ -19,4 +19,7 @@ markdown==2.6.8
 django-filter==1.0.4
 
 # utils
+PyJWT==1.5.0
+
+# env
 ipython==6.0

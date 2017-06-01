@@ -1,5 +1,4 @@
 import jwt
-import uuid
 from datetime import datetime
 from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.compat import get_username
@@ -33,23 +32,13 @@ def refresh_jwt_payload_handler(user):
 
 
 def access_jwt_payload_handler(user):
-    payload = {
+    return {
         'uid': user.pk,
         'ema': user.email,
         'una': get_username(user),
         'iat': datetime.utcnow(),
         'exp': datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA,
     }
-    if isinstance(user.pk, uuid.UUID):
-        payload['uid'] = str(user.pk)
-
-    if api_settings.JWT_AUDIENCE is not None:
-        payload['aud'] = api_settings.JWT_AUDIENCE
-
-    if api_settings.JWT_ISSUER is not None:
-        payload['iss'] = api_settings.JWT_ISSUER
-
-    return payload
 
 
 def get_refresh_secret_key(user):
