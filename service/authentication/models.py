@@ -1,23 +1,23 @@
 import hashlib
 import random
 from django.conf import settings
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
-from model_utils import Choices
 
 from lib.utils.mailer import mail_users
+from lib.utils.constant import Constant
+from lib.utils.db.fields import ConstantField
 
 __all__ = []
 
 
 class User(AbstractUser):
-    TYPE = Choices(
-        (0, 'user', 'user'),
-        (1, 'bot', 'bot'),
+    TYPE = Constant(
+        user=0,
+        bot=1,
     )
 
-    type_id = models.PositiveIntegerField(choices=TYPE, default=TYPE.user)
+    type_id = ConstantField(TYPE, default=TYPE.user)
 
     def prepare_for_activation(self):
         salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]

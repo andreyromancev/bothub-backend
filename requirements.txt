@@ -6,7 +6,6 @@ django-cors-headers==2.0.2
 # db
 psycopg2==2.7.1
 dj-database-url==0.4.2
-django-model-utils==3.0.0
 
 # threads, mq and events
 gevent==1.2.1

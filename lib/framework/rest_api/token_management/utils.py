@@ -27,13 +27,14 @@ def refresh_jwt_decode_handler(token, key):
 def refresh_jwt_payload_handler(user):
     return {
         'uid': user.pk,
-        'una': get_username(user),
+        'uty': user.type,
     }
 
 
 def access_jwt_payload_handler(user):
     return {
         'uid': user.pk,
+        'uty': user.type,
         'ema': user.email,
         'una': get_username(user),
         'iat': datetime.utcnow(),
