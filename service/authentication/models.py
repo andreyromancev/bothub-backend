@@ -12,12 +12,11 @@ __all__ = []
 
 
 class User(AbstractUser):
-    TYPE = Constant(
-        user=0,
-        bot=1,
-    )
+    class Type(Constant):
+        USER = 0
+        BOT = 1
 
-    type_id = ConstantField(TYPE, default=TYPE.user)
+    type_id = ConstantField(Type, default=Type.USER)
 
     def prepare_for_activation(self):
         salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]

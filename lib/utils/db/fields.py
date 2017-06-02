@@ -11,7 +11,7 @@ class ConstantField(SmallIntegerField):
     def __init__(self, constant=None, **kwargs):
         validators = kwargs.get('validators', [])
         validators.append(self._validate)
-        super(ConstantField, self).__init__(choices=constant.CHOICES, validators=validators, **kwargs)
+        super(ConstantField, self).__init__(choices=constant.get_choices(), validators=validators, **kwargs)
         self._constant = constant
 
     def contribute_to_class(self, cls, name):
@@ -22,6 +22,7 @@ class ConstantField(SmallIntegerField):
 
         def constant_getter(model_obj):
             value = getattr(model_obj, self.attname)
+
             return self._constant.get_name(value)
 
         def constant_setter(model_obj, value):

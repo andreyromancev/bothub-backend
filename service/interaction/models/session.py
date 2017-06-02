@@ -10,15 +10,14 @@ class Session(models.Model):
 
 
 class SessionAccess(models.Model):
-    TYPE = Constant(
-        read=0,
-        write=1,
-    )
+    class Type(Constant):
+        READ = 0
+        WRITE = 1
 
     user_id = models.PositiveIntegerField(db_index=True)
     session = models.ForeignKey('Session', on_delete=models.CASCADE)
 
-    type_id = ConstantField(TYPE, default=TYPE.read)
+    type_id = ConstantField(Type, default=Type.READ)
 
     class Meta:
         unique_together = (('user_id', 'type_id', 'session'),)

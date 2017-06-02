@@ -1,25 +1,16 @@
 class Constant:
-    def __init__(self, **kwargs):
-        choices = list()
-        self._values = dict()
-        for k, v in kwargs.items():
-            self._values[k] = v
-            choices.append((v, k))
+    @classmethod
+    def get_choices(cls):
+        return tuple((k, v) for k, v in cls.__dict__.items() if k.isupper())
 
-        self.CHOICES = tuple(choices)
-
-    def __getattr__(self, attname):
-        try:
-            return self._values[attname]
-        except KeyError:
-            raise AttributeError(attname)
-
-    def get_name(self, const_id):
-        for k, v in self._values.items():
-            if v == const_id:
-                return k
+    @classmethod
+    def get_name(cls, const_id):
+        for k, v in cls.__dict__.items():
+            if k.isupper() and v == const_id:
+                return k.lower()
 
         return None
 
-    def get_id(self, const_name):
-        return getattr(self, const_name, None)
+    @classmethod
+    def get_id(cls, name):
+        return getattr(cls, name.upper(), None)
