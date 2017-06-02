@@ -116,7 +116,7 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=10),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_PAYLOAD_HANDLER': 'lib.framework.rest_api.token_management.utils.access_jwt_payload_handler',
 }
 

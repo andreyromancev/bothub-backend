@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 from rest_framework import serializers
 from rest_framework_jwt.utils import jwt_encode_handler
 from rest_framework_jwt.compat import get_username_field, PasswordField
+from rest_framework_jwt.settings import api_settings
 
 from .models import RefreshToken
 from .settings import TOKEN_DEFAULT_SERVICE
@@ -45,7 +46,7 @@ class AccessTokenSerializer(serializers.Serializer):
 
         return {
             'access_token': access_token,
-            'refresh_token': refresh_token,
+            'expires_in': api_settings.JWT_EXPIRATION_DELTA.seconds,
         }
 
 
@@ -93,6 +94,7 @@ class RefreshTokenSerializer(serializers.Serializer):
                 return {
                     'refresh_token': refresh_obj.key,
                     'access_token': access_token,
+                    'expires_in': api_settings.JWT_EXPIRATION_DELTA.seconds,
                 }
             else:
                 msg = _('Unable to log in with provided credentials.')
