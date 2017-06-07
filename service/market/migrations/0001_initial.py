@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('user_id', models.PositiveIntegerField(db_index=True, unique=True)),
-                ('name', models.CharField(db_index=True, max_length=64)),
+                ('name', models.CharField(db_index=True, max_length=32)),
                 ('short_description', models.TextField()),
                 ('description', models.TextField()),
             ],

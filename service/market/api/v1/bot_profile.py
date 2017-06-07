@@ -6,7 +6,7 @@ from service.market.models import BotProfile
 class BotProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BotProfile
-        fields = ('id', 'name', 'short_description', 'description')
+        fields = ('url', 'id', 'name', 'short_description', 'description')
 
 
 class BotProfileViewSet(viewsets.ModelViewSet):
