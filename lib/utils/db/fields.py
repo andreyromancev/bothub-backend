@@ -9,9 +9,11 @@ class InvalidConstantFieldNameException(Exception):
 
 class ConstantField(SmallIntegerField):
     def __init__(self, constant=None, **kwargs):
-        validators = kwargs.get('validators', [])
-        validators.append(self._validate)
-        super(ConstantField, self).__init__(choices=constant.get_choices(), validators=validators, **kwargs)
+        kwargs.setdefault('validators', []).append(self._validate)
+        if 'choices' not in kwargs:
+            kwargs['choices'] = constant.get_choices()
+
+        super(ConstantField, self).__init__(**kwargs)
         self._constant = constant
 
     def contribute_to_class(self, cls, name):
