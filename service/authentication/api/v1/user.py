@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.validators import UniqueValidator
 from rest_framework.decorators import list_route
 
-from service.authentication.models import User
+from ...models import User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

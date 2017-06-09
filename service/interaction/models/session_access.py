@@ -9,7 +9,7 @@ class SessionAccess(models.Model):
         WRITE = 1
 
     user_id = models.PositiveIntegerField(db_index=True)
-    session = models.ForeignKey('Session', on_delete=models.CASCADE)
+    session = models.ForeignKey('Session', related_name='access_set', on_delete=models.CASCADE)
 
     type_id = ConstantField(Type, default=Type.READ)
 

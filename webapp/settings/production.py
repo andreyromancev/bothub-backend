@@ -22,11 +22,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'django_filters',
     'lib.utils.mailer',
     'lib.framework.celeryapp',
     'lib.framework.rest_api.token_management',
     'service.authentication',
-    'service.market',
+    'service.bots',
     'service.interaction',
 ]
 
@@ -112,7 +113,13 @@ REST_FRAMEWORK = {
         'lib.framework.rest_api.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter'
+    ),
 }
 
 JWT_AUTH = {

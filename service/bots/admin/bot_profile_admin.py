@@ -1,5 +1,5 @@
 from django.contrib import admin
-from service.market.models import BotProfile
+from ..models import BotProfile
 
 
 class BotProfileAdmin(admin.ModelAdmin):

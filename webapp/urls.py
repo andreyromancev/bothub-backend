@@ -7,5 +7,5 @@ urlpatterns = [
 
     url(r'^', include('service.authentication.urls')),
     url(r'^', include('service.interaction.urls')),
-    url(r'^', include('service.market.urls')),
+    url(r'^', include('service.bots.urls')),
 ]
